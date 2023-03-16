@@ -1,0 +1,14 @@
+<div class="chat-window" [ngClass]="{'chat-window--open': isOpen}">
+  <app-chat-header (closeChat)="closeChatWindow()"></app-chat-header>
+  <div class="chat-window__messages">
+    <!-- <app-chat-message
+      *ngFor="let message of messages"
+      [messageText]="message.text"
+      [messageTime]="message.time"
+      [isUser]="message.isUser"
+    ></app-chat-message> -->
+    <app-chat-message-list></app-chat-message-list>
+  </div>
+  <app-chat-user-input (sendUserInput)="addMessage($any($event))"></app-chat-user-input>
+</div>
+<app-chat-dots></app-chat-dots>

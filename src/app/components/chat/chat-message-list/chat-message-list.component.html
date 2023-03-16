@@ -1,0 +1,6 @@
+<app-chat-message
+*ngFor="let message of messages"
+[messageText]="message.text"
+[messageTime]="message.time"
+[isUser]="message.isUser"
+></app-chat-message>

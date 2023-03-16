@@ -1,0 +1,45 @@
+.chat-window {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  max-height: 500px;
+  background-color: #ffffff;
+}
+
+.chat-window--open {
+  max-height: 600px;
+}
+
+.chat-window__messages {
+  height: 300px;
+  overflow-y: scroll;
+  padding: 16px;
+}
+
+.chat-window__messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-window__messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.chat-window__messages::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+@media screen and (max-width: 576px) {
+  .chat-window {
+    width: 100%;
+    border-radius: 0;
+    bottom: 0;
+    left: 0;
+  }
+}

@@ -1,0 +1,44 @@
+.message {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.message--user {
+  justify-content: flex-end;
+}
+
+.message__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+
+.message__text {
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin-bottom: 0px;
+  color: rgb(0, 0, 0); /* Standardtextfarbe */
+  background-color: #f0f0f0; /* Standardhintergrundfarbe */
+}
+
+.message--user .message__text {
+  color: rgb(255, 255, 255); /* Textfarbe für Benutzernachricht */
+  background-color: #0084ff; /* Hintergrundfarbe für Benutzernachricht */
+}
+
+.message__info {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 8px; /* Hinzufügen von Abstand zwischen Text und Zeitstempel */
+}
+
+.message--user .message__info {
+  justify-content: flex-end; /* Nachrichtenzeitstempel rechts ausrichten, wenn sie vom Benutzer stammen */
+}
+
+.message__time {
+  font-size: 12px;
+  color: #808080;
+  font-style: italic; /* Kursivschriftstil hinzufügen */
+  text-align: left; /* Links ausrichten, wenn die Nachricht nicht vom Benutzer stammt */
+}
