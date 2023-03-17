@@ -1,3 +1,3 @@
-<button class="chatbot-button" (click)="onClick()">
-  <i class="fas fa-comment"></i>
+<button class="chatbot-button" (click)="toggleChatWindow()">
+  <i [ngClass]="{'fa-comment': !isOpen, 'fa-times': isOpen}"></i>
 </button>

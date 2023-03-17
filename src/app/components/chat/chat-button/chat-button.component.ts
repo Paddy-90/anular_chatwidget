@@ -7,8 +7,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ChatButtonComponent {
   @Output() clicked = new EventEmitter();
+  @Input() isOpen!: boolean;
 
   onClick() {
     this.clicked.emit();
+  }
+
+  toggleChatWindow() {
+    this.isOpen = !this.isOpen;
+    this.clicked.emit();
+    console.log("Button: " + this.isOpen)
   }
 }

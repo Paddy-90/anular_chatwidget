@@ -16,11 +16,19 @@ export class ChatWindowComponent implements OnInit{
   constructor(private chatbotService: ChatbotService) {}
 
   ngOnInit() {
-    this.isOpen = true;
+    this.isOpen = false;
   }
 
   closeChatWindow() {
+    console.log(this.isOpen)
     this.isOpen = false;
+    console.log(this.isOpen)
+  }
+
+  toggleChatWindow(){
+    console.log("Before: " + this.isOpen)
+    this.isOpen = !this.isOpen;
+    console.log("After: " + this.isOpen)
   }
 
   getTime(): string{

@@ -9,6 +9,5 @@
     ></app-chat-message>
   </div>
   <app-chat-user-input (sendUserInput)="addMessage($any($event))"></app-chat-user-input>
-
 </div>
-<app-chat-button (clicked)="toggleChatWindow()" [isOpen]="isOpen"></app-chat-button>
+<app-chat-dots></app-chat-dots>
