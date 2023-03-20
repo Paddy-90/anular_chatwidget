@@ -32,17 +32,12 @@ export class ChatbotService {
     };
     return this.http.post<any>(this.rasaUrl, body, this.httpOptions).pipe(
       map(response => {
-        console.log("Service " + response)
         const responseMessage: Message = {
           text: response[0].text,
           image: response[0].image,
           time: this.time(),
           isUser: false
         };
-        console.log("Service " + response[0].text)
-        // message.text = response[0].text;
-        // message.image = response[0].image;
-        // message.time = this.time();
         return responseMessage;
       })
     );

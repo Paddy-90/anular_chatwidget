@@ -22,15 +22,11 @@ export class ChatWindowComponent implements OnInit{
   }
 
   closeChatWindow() {
-    console.log(this.isOpen)
     this.isOpen = false;
-    console.log(this.isOpen)
   }
 
   toggleChatWindow(){
-    console.log("Before: " + this.isOpen)
     this.isOpen = !this.isOpen;
-    console.log("After: " + this.isOpen)
   }
 
   getTime(): string{
@@ -57,14 +53,8 @@ export class ChatWindowComponent implements OnInit{
     }, 100);
 
     this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
-      console.log("res:" + response)
-      setTimeout(() => {
-        this.messages.push(response);
-      }, 1000);
-
-      setTimeout(() => {
-        this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
-      }, 1100);
+      this.messages.push(response);
+      this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
     });
   }
 
