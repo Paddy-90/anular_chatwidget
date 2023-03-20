@@ -1,10 +1,10 @@
 <div class="message" [ngClass]="{'message--user': isUser}">
   <div class="message__content">
-    <p class="message__text" >{{ messageText }}</p>
+    <p class="message__text" [innerHTML]="messageText">{{ messageText }}</p>
     <div class="message__info">
       <span class="message__time">{{ messageTime }}</span>
     </div>
   </div>
 </div>
 
-<!-- [innerHTML]="linkify(messageText)" -->
+

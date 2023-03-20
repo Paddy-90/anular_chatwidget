@@ -1,6 +1,6 @@
 <div class="chat-window" [ngClass]="{'chat-window--open': isOpen}">
   <app-chat-header (closeChat)="closeChatWindow()"></app-chat-header>
-  <div class="chat-window__messages">
+  <div class="chat-window__messages" #messageContainer>
     <app-chat-message
       *ngFor="let message of messages"
       [messageText]="message.text"

@@ -10,11 +10,18 @@ export class ChatMessageComponent {
   @Input() messageTime!: string;
   @Input() isUser!: boolean;
 
-  // linkify(text: string): string {
-  //   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  //   const wwwRegex = /(www.[^\s]+)/g;
-  //   console.log("text")
-  //   return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>').replace(wwwRegex, '<a href="http://$1" target="_blank">$1</a>');
-  // }
-
+  linkify(text: string): string {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const wwwRegex = /(www.[^\s]+)/g;
+    console.log("text")
+    return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>').replace(wwwRegex, '<a href="http://$1" target="_blank">$1</a>');
+  }
 }
+
+
+// linkify(text: string): string {
+//   const urlRegex = /(https?:\/\/[^\s]+)/g;
+//   const wwwRegex = /(www.[^\s]+)/g;
+//   console.log("text")
+//   return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>').replace(wwwRegex, '<a href="http://$1" target="_blank">$1</a>');
+// }

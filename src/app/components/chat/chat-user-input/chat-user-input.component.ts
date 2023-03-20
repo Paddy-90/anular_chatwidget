@@ -14,7 +14,7 @@ export class ChatUserInputComponent {
     console.log("Test1")
     console.log(this.userInput)
     if (this.userInput) {
-      this.sendUserInput.emit(this.userInput);
+      this.sendUserInput.emit(String(this.userInput));
       this.userInput = '';
     }
   }

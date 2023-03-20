@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef} from '@angular/core';
 import { Message } from '../../../service/message.model';
 import { ChatbotService } from '../../../service/chat.service';
 
@@ -8,12 +8,14 @@ import { ChatbotService } from '../../../service/chat.service';
   styleUrls: ['./chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit{
+
+
   isOpen = false;
   messages: Message[] = [
     { text: 'Hallo, wie kann ich Ihnen helfen?', image: '', time: '10:00', isUser: false }
   ];
 
-  constructor(private chatbotService: ChatbotService) {}
+  constructor(private chatbotService: ChatbotService, private el: ElementRef) {}
 
   ngOnInit() {
     this.isOpen = false;
@@ -40,7 +42,9 @@ export class ChatWindowComponent implements OnInit{
   }
 
   addMessage(messageText: string) {
-    console.log("Test")
+    if (!messageText || messageText.trim().length === 0) {
+      return; // do not add empty messages
+    }
     const newMessage: Message = {
       text: messageText,
       image: '',
@@ -48,9 +52,25 @@ export class ChatWindowComponent implements OnInit{
       isUser: true
     };
     this.messages.push(newMessage);
+    setTimeout(() => {
+      this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
+    }, 100);
 
     this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
-      this.messages.push(response);
+      console.log("res:" + response)
+      setTimeout(() => {
+        this.messages.push(response);
+      }, 1000);
+
+      setTimeout(() => {
+        this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
+      }, 1100);
     });
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.el.nativeElement.querySelector('.chat-window__messages').scrollTop = this.el.nativeElement.querySelector('.chat-window__messages').scrollHeight;
+    } catch(err) { }
   }
 }
