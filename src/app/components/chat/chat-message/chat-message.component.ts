@@ -8,8 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ChatMessageComponent implements OnInit{
   @Input() messageText!: string;
   @Input() messageTime!: string;
+  @Input() messageImage!: string;
   @Input() isUser!: boolean;
 
+  messageImagel = true;
   isTyping = false;
 
   ngOnInit() {
@@ -21,13 +23,6 @@ export class ChatMessageComponent implements OnInit{
 
       }, 1000);
     }
+    console.log(this.messageImage)
   }
 }
-
-
-// linkify(text: string): string {
-//   const urlRegex = /(https?:\/\/[^\s]+)/g;
-//   const wwwRegex = /(www.[^\s]+)/g;
-//   console.log("text")
-//   return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>').replace(wwwRegex, '<a href="http://$1" target="_blank">$1</a>');
-// }

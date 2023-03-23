@@ -1,3 +1,9 @@
 <button class="chatbot-button" (click)="toggleChatWindow()">
-  <i [ngClass]="{'fa-comment': !isOpen, 'fa-times': isOpen}"></i>
+  <i *ngIf="!isOpen" class="fa fa-comment" aria-hidden="true"></i>
+  <i *ngIf="isOpen" class="fa fa-times" aria-hidden="true"></i>
 </button>
+
+
+  <!-- <fa-icon [icon]="isOpen ? 'comment' : 'times'"></fa-icon> -->
+  <!-- <fa-icon [icon]="['fas', 'square']"></fa-icon> -->
+  <!-- <i class="fa" [ngClass]="{'faComment': !isOpen, 'faTimes': isOpen}"></i> -->

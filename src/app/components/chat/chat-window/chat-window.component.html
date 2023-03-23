@@ -1,10 +1,11 @@
 <div class="chat-window" [ngClass]="{'chat-window--open': isOpen}">
-  <app-chat-header (closeChat)="closeChatWindow()"></app-chat-header>
+  <app-chat-header (closeChat)="toggleChatWindow()"></app-chat-header>
   <div class="chat-window__messages" #messageContainer>
     <app-chat-message
       *ngFor="let message of messages"
       [messageText]="message.text"
       [messageTime]="message.time"
+      [messageImage]="message.image"
       [isUser]="message.isUser"
     ></app-chat-message>
   </div>
@@ -12,3 +13,4 @@
 
 </div>
 <app-chat-button (clicked)="toggleChatWindow()" [isOpen]="isOpen"></app-chat-button>
+<i class="bi bi-0-circle"></i>

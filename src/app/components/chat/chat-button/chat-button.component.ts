@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+
 @Component({
   selector: 'app-chat-button',
   templateUrl: './chat-button.component.html',
@@ -16,6 +17,5 @@ export class ChatButtonComponent {
   toggleChatWindow() {
     this.isOpen = !this.isOpen;
     this.clicked.emit();
-    console.log("Button: " + this.isOpen)
   }
 }

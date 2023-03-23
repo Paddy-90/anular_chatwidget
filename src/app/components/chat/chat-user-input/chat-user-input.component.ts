@@ -11,8 +11,6 @@ export class ChatUserInputComponent {
   @Output() sendUserInput = new EventEmitter<string>();
 
   onSubmit() {
-    console.log("Test1")
-    console.log(this.userInput)
     if (this.userInput) {
       this.sendUserInput.emit(String(this.userInput));
       this.userInput = '';

@@ -20,25 +20,29 @@ export class ChatbotService {
   time(): string{
     const now = new Date();
     const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(now);
+    const dayOfWeek = new Intl.DateTimeFormat('de', { weekday: 'short' }).format(now);
     const time = `${timeString} - ${dayOfWeek}`;
     return time;
   }
 
-  sendMessage(message: Message): Observable<Message> {
+  sendMessage(message: Message): Observable<Message[]> {
     const body = {
       message: message.text,
       sender: 'sadf3'
     };
     return this.http.post<any>(this.rasaUrl, body, this.httpOptions).pipe(
-      map(response => {
-        const responseMessage: Message = {
-          text: response[0].text,
-          image: response[0].image,
-          time: this.time(),
-          isUser: false
-        };
-        return responseMessage;
+      map(responses => {
+        var responseMessages:Message[] = [];
+        responses.forEach((element: any) => {
+          const message: Message = {
+            text: element.text,
+            image: element.image,
+            time: this.time(),
+            isUser: false
+          }
+          responseMessages.push(message)
+        });
+        return responseMessages;
       })
     );
   }

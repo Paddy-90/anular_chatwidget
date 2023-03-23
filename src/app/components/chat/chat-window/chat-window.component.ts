@@ -12,16 +12,12 @@ export class ChatWindowComponent implements OnInit{
 
   isOpen = false;
   messages: Message[] = [
-    { text: 'Hallo, wie kann ich Ihnen helfen?', image: '', time: '10:00', isUser: false }
+    { text: 'Hallo, wie kann ich Ihnen helfen?', image: '', time: this.getTime(), isUser: false }
   ];
 
   constructor(private chatbotService: ChatbotService, private el: ElementRef) {}
 
   ngOnInit() {
-    this.isOpen = false;
-  }
-
-  closeChatWindow() {
     this.isOpen = false;
   }
 
@@ -41,26 +37,56 @@ export class ChatWindowComponent implements OnInit{
     if (!messageText || messageText.trim().length === 0) {
       return; // do not add empty messages
     }
+    const newMessage = this.addUserMessage(messageText)
+
+    this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
+      this.addBotMessages(response)
+      // response.forEach((element: any) => {
+      //     this.addBotMessage(element)
+      // })
+    });
+  }
+
+  addUserMessage(userMessage: string): Message{
     const newMessage: Message = {
-      text: messageText,
+      text: userMessage,
       image: '',
       time: this.getTime(),
       isUser: true
     };
     this.messages.push(newMessage);
-    setTimeout(() => {
-      this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
-    }, 100);
-
-    this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
-      this.messages.push(response);
-      this.scrollToBottom(); // scroll to bottom after response message (with 100ms timeout)
-    });
+    this.scrollToBottom()
+    return newMessage
   }
+
+  addBotMessage(botMessage: Message): void{
+    if(botMessage.text !== undefined) botMessage.text = this.linkify(botMessage.text);
+    //if(botMessage.text === undefined && botMessage.image !== undefined) botMessage.text = "<img src='" + botMessage.image + "'>";
+    console.log(botMessage.image)
+    //if(botMessage.text === undefined && botMessage.image !== undefined) botMessage.text = "";
+    this.messages.push(botMessage);
+    this.scrollToBottom();
+  }
+
 
   scrollToBottom(): void {
     try {
-      this.el.nativeElement.querySelector('.chat-window__messages').scrollTop = this.el.nativeElement.querySelector('.chat-window__messages').scrollHeight;
+      setTimeout(() => {
+        this.el.nativeElement.querySelector('.chat-window__messages').scrollTop = this.el.nativeElement.querySelector('.chat-window__messages').scrollHeight;
+      }, 100);
     } catch(err) { }
+  }
+
+  linkify(text: string): string {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const wwwRegex = /(www.[^\s]+)/g;
+    return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>').replace(wwwRegex, '<a href="http://$1" target="_blank">$1</a>');
+  }
+
+  async addBotMessages(response: any[]) {
+    for (const element of response) {
+      await this.addBotMessage(element);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
   }
 }

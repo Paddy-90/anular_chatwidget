@@ -1,11 +1,12 @@
 <div class="message" [ngClass]="{'message--user': isUser}">
   <div class="message__content">
-    <p class="message__text" [innerHTML]="isTyping ? 'schreibt...' : messageText"></p>
-
-    <!-- <p class="message__text" [innerHTML]="messageText">{{ messageText }}</p> -->
+    <p class="message__text" >
+      <span *ngIf="!isTyping" [innerHTML]="messageText">{{ messageText }}</span>
+      <span *ngIf="isTyping">schreibt...</span>
+      <img *ngIf="messageImage && !isTyping" [src]="messageImage" class="message__image" alt="Bildnachricht" />
+    </p>
     <div class="message__info">
       <span class="message__time">{{ messageTime }}</span>
     </div>
   </div>
 </div>
-
