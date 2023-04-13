@@ -3,4 +3,5 @@ export interface Message {
   time: string;
   image: string;
   isUser: boolean;
+  buttons: any;
 }

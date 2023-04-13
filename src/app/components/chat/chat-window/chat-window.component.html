@@ -6,7 +6,9 @@
       [messageText]="message.text"
       [messageTime]="message.time"
       [messageImage]="message.image"
+      [messageButtons]="message.buttons"
       [isUser]="message.isUser"
+      (buttonClick)="handleButtonClick($event)"
     ></app-chat-message>
   </div>
   <app-chat-user-input (sendUserInput)="addMessage($any($event))"></app-chat-user-input>

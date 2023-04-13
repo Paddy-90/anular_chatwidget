@@ -7,7 +7,7 @@ import { Message } from './message.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ChatbotService {
+export class ChatService {
   private rasaUrl = 'http://localhost:5005/webhooks/rest/webhook';
   private httpOptions = {
     headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class ChatbotService {
   sendMessage(message: Message): Observable<Message[]> {
     const body = {
       message: message.text,
-      sender: 'sadf3'
+      sender: 'sadf34'
     };
     return this.http.post<any>(this.rasaUrl, body, this.httpOptions).pipe(
       map(responses => {
@@ -38,7 +38,8 @@ export class ChatbotService {
             text: element.text,
             image: element.image,
             time: this.time(),
-            isUser: false
+            isUser: false,
+            buttons: element.buttons
           }
           responseMessages.push(message)
         });

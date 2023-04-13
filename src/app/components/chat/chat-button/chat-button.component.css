@@ -1,6 +1,5 @@
 @import "~font-awesome/css/font-awesome.css";
 
-
 .chatbot-button {
   position: fixed;
   bottom: 20px;
@@ -20,8 +19,4 @@
 .chatbot-button:hover {
   background-color: #007bff;
   color: #fff;
-}
-
-.fas {
-  font-size: 24px;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef} from '@angular/core';
 import { Message } from '../../../service/message.model';
-import { ChatbotService } from '../../../service/chat.service';
+import { ChatService } from '../../../service/chat.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -9,13 +9,12 @@ import { ChatbotService } from '../../../service/chat.service';
 })
 export class ChatWindowComponent implements OnInit{
 
-
   isOpen = false;
   messages: Message[] = [
-    { text: 'Hallo, wie kann ich Ihnen helfen?', image: '', time: this.getTime(), isUser: false }
+    { text: 'Hallo, wie kann ich Ihnen helfen?', image: '', time: this.getTime(), isUser: false, buttons: '' }
   ];
 
-  constructor(private chatbotService: ChatbotService, private el: ElementRef) {}
+  constructor(private chatbotService: ChatService, private el: ElementRef) {}
 
   ngOnInit() {
     this.isOpen = false;
@@ -41,9 +40,6 @@ export class ChatWindowComponent implements OnInit{
 
     this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
       this.addBotMessages(response)
-      // response.forEach((element: any) => {
-      //     this.addBotMessage(element)
-      // })
     });
   }
 
@@ -52,7 +48,8 @@ export class ChatWindowComponent implements OnInit{
       text: userMessage,
       image: '',
       time: this.getTime(),
-      isUser: true
+      isUser: true,
+      buttons: ''
     };
     this.messages.push(newMessage);
     this.scrollToBottom()
@@ -61,9 +58,6 @@ export class ChatWindowComponent implements OnInit{
 
   addBotMessage(botMessage: Message): void{
     if(botMessage.text !== undefined) botMessage.text = this.linkify(botMessage.text);
-    //if(botMessage.text === undefined && botMessage.image !== undefined) botMessage.text = "<img src='" + botMessage.image + "'>";
-    console.log(botMessage.image)
-    //if(botMessage.text === undefined && botMessage.image !== undefined) botMessage.text = "";
     this.messages.push(botMessage);
     this.scrollToBottom();
   }
@@ -88,5 +82,9 @@ export class ChatWindowComponent implements OnInit{
       await this.addBotMessage(element);
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
+  }
+
+  handleButtonClick(payload: string): void {
+    this.addMessage(payload)
   }
 }

@@ -8,5 +8,10 @@
     <div class="message__info">
       <span class="message__time">{{ messageTime }}</span>
     </div>
+    <div *ngIf="messageButtons && messageButtons.length > 0 && !isTyping" class="message__buttons">
+      <button *ngFor="let button of messageButtons" class="message__button" (click)="onButtonClick(button.payload)">
+        {{ button.title }}
+      </button>
+    </div>
   </div>
 </div>

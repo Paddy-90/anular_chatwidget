@@ -11,11 +11,7 @@ import { ChatWindowComponent } from './components/chat/chat-window/chat-window.c
 import { ChatHeaderComponent } from './components/chat/chat-header/chat-header.component';
 import { ChatUserInputComponent } from './components/chat/chat-user-input/chat-user-input.component';
 import { ChatButtonComponent } from './components/chat/chat-button/chat-button.component';
-import { TestComponent } from './test/test.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ChatDotsComponent } from './components/chat/chat-dots/chat-dots.component';
-import { ChatMessageListComponent } from './components/chat/chat-message-list/chat-message-list.component';
-
 
 @NgModule({
   declarations: [
@@ -25,9 +21,6 @@ import { ChatMessageListComponent } from './components/chat/chat-message-list/ch
     ChatHeaderComponent,
     ChatUserInputComponent,
     ChatButtonComponent,
-    TestComponent,
-    ChatDotsComponent,
-    ChatMessageListComponent,
   ],
   imports: [
     BrowserModule,

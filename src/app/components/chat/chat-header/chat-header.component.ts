@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chat-header',
@@ -8,9 +7,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class ChatHeaderComponent {
   title = 'Stubu';
-  faXmark = faXmark;
   @Output() closeChat = new EventEmitter();
 
+  //Method to close the chatwindow
   onCloseClick() {
     this.closeChat.emit();
   }

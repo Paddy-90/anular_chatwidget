@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-chat-message',
@@ -10,19 +10,26 @@ export class ChatMessageComponent implements OnInit{
   @Input() messageTime!: string;
   @Input() messageImage!: string;
   @Input() isUser!: boolean;
+  @Input() messageButtons!: { title: string; payload: string }[];
 
-  messageImagel = true;
+  @Output() buttonClick: EventEmitter<string> = new EventEmitter<string>();
+
+  // Define a property 'isTyping' to represent whether the user is typing or not
   isTyping = false;
 
   ngOnInit() {
+    // If the component is not representing the user, set 'isTyping' to true
     if (!this.isUser) {
       this.isTyping = true;
-
+      // Set a timer to set 'isTyping' to false after a delay
       setTimeout(() => {
         this.isTyping = false;
-
       }, 1000);
     }
-    console.log(this.messageImage)
+  }
+
+  // Method for buttons in the chatbot. Emit the 'buttonClick' event with the provided payload.
+  onButtonClick(payload: string): void {
+    this.buttonClick.emit(payload);
   }
 }
